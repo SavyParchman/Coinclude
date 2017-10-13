@@ -1,0 +1,62 @@
+<!---------------- COINS VIEW ---------------->
+
+<section class="coin-view">
+    <main class="coin-table">
+      <h1 class="coin-title">Coins</h1><br>
+      
+      <input id="filter" type="text" placeholder="Search" class="form-control" ng-model="filterTable">
+  
+      <uib-pagination class="coin-pagination" total-items="(coins | filter:filterTable).length" ng-model="currentPage" ng-change="updatePageIndexes()" 
+        max-size="maxPaginationSize" items-per-page="itemsPerPage" boundary-links="true" 
+          previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+      </uib-pagination> 
+
+      <p> The table has two data fields in certain columns. You can sort by either of those fields. </p> 
+  
+<table class="table table-condensed table-hover">
+  <thead>
+    <tr>
+      <th style="width: 25px"> &#35; </th>
+
+      <th class="sortable" style="width: 10%" ng-click="singleSort('coinsymbol')">
+          Symbol <span class="caret-blank" ng-class="{'caret-down':sortDescend('coinsymbol'), 'caret-up':sortAscend('coinsymbol')}"></span>
+        </th>
+
+  
+      <th class="sortable" style="width: 25%" ng-click="singleSort('coinname')">
+        Name <span class="caret-blank" ng-class="{'caret-down':sortDescend('coinname'), 'caret-up':sortAscend('coinname')}"></span>
+      </th>
+  
+      <th class="sortable" style="width: 25%" ng-click="doubleSort('coinreviews','coinrating')" data-uib-tooltip="{{ sortTooltip('coinrating','coinreviews') }}" data-tooltip-append-to-body="true">
+        Reviews - Rating <span class="caret-blank" ng-class="{'caret-down':sortDescend('coinreviews','coinrating'), 'caret-up':sortAscend('coinreviews','coinrating')}"></span>
+      </th>
+  
+      
+    <tr>
+  </thead>
+    <tbody>
+      <tr class="coin-row" ng-repeat="coin in coins | orderBy:[filterSort, sortType, secondSortType, thirdSortType]"
+         ng-show="(filterSort(coin) == 1) && ($index >= firstIndex) && ($index < lastIndex)">
+        <td class="table-row-index">
+          {{ $index + 1 }}
+        </td>
+
+        <td class="coin-symbol">
+            {{ coin.coinsymbol }}
+          </td>
+
+        <td class="coin-name">
+          {{ coin.coinname }}
+        </td>
+  
+        <td class="coin-reviewsRating">
+          {{ coin.coinreviews }} <br> 
+          {{ coin.coinrating }}
+        </td>
+  
+      </tr>
+    </tbody>
+</table> 
+      
+</main>
+</section>

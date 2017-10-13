@@ -1,0 +1,45 @@
+.transition {
+  text-align: center;
+  z-index: 99;
+}
+.transition:after {
+  content: '';
+}
+ 
+.user-auth {
+  display: flex;
+  font-family: "Raleway", sans-serif;
+  font-size: 10px;
+  text-align: center;
+  color: black;
+}
+.text-formatting, .transition { 
+  display: flex;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: "Raleway", sans-serif;
+  font-size: 12px;
+  color: black;
+}
+.login {
+  float: right;
+  margin-right: 10px;
+}
+.input-login {
+  background-color: mintcream;
+  width: 50px;
+  cursor: pointer;
+  border: .5px solid black;
+  padding: 5px;
+  color: black;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  z-index: 9999;
+}
+
+.login-container {
+ background-color: white;
+ height: 20vh;
+}

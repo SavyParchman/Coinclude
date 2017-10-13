@@ -1,0 +1,765 @@
+
+// Base
+$c-black: #E5E6F9;
+$c-white: #393A3E;
+$c-blue: #354EC5;
+$c-red: #f13738; 
+$white: #FFFFFF;
+$offwhite: #F5F1ED;
+$shadow: #BCB8E6;
+$blue: #459DFA;
+
+// Navbar
+$c-Navbar: $c-white;
+$c-Navbar-bg: $offwhite;
+$l-Navbar-brandOffset-sm: 0.6rem;
+$l-Navbar-menuOffset-sm: 14%;
+$l-Navbar-itemLineHeight: 2.8rem;
+$l-Navbar-itemPaddingX: 1.4rem;
+$l-Navbar-itemPaddingY: 1.6rem;
+$l-Navbar-size: $l-Navbar-itemLineHeight + $l-Navbar-itemPaddingY * 2;
+
+// Toggle button
+$c-Toggle-bg: transparent;
+$c-Toggle-bar: $c-white;
+$l-Toggle-size: $l-Navbar-size;
+$l-Toggle-radius: 100%;
+$l-Toggle-barWidth: 2.1rem;
+$l-Toggle-barHeight: 0.2rem;
+$l-Toggle-barSpacing: 0.7rem;
+
+// Social links
+$l-socialLink-iconSize: unitSize(2);
+
+%resetList {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+@mixin visuallyhidden() {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+%visuallyhidden {
+  @include visuallyhidden();
+}
+
+
+$z-indexes: (
+    main: (
+        foo,
+        bar,
+        tooltip
+    ),
+    header: (),
+    modal: ()
+) !default;
+
+@function z-index($key1, $key2: null) {
+    $map: $z-indexes;
+    $found-index: null;
+    @if (map-has-key($map, $key1)) {
+        $found-index: index(map-keys($map), $key1);
+        @if ($key2) {
+            $map: map-get($map, $key1);
+            $found-index: index($map, $key2);
+        }
+    }
+    @return $found-index;
+}
+
+@function z($key1, $key2: null) {
+    @return z-index($key1, $key2);
+}
+
+@function to-number($value) {
+  @if type-of($value) == 'number' {
+    @return $value;
+  } @else if type-of($value) != 'string' {
+    $_: log('Value for `to-number` should be a number or a string.');
+  }
+  
+  $result: 0;
+  $digits: 0;
+  $minus: str-slice($value, 1, 1) == '-';
+  $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+  
+  @for $i from if($minus, 2, 1) through str-length($value) {
+    $character: str-slice($value, $i, $i);
+    
+    @if not (index(map-keys($numbers), $character) or $character == '.') {
+      @return to-length(if($minus, -$result, $result), str-slice($value, $i))
+    }
+    
+    @if $character == '.' {
+      $digits: 1; 
+    } @else if $digits == 0 {
+      $result: $result * 10 + map-get($numbers, $character);  
+    } @else {
+      $digits: $digits * 10;
+      $result: $result + map-get($numbers, $character) / $digits;
+    }
+  }
+  
+  @return if($minus, -$result, $result);;
+}
+
+@function to-length($value, $unit) {
+  $units: ('px': 1px, 'cm': 1cm, 'mm': 1mm, '%': 1%, 'ch': 1ch, 'pc': 1pc, 'in': 1in, 'em': 1em, 'rem': 1rem, 'pt': 1pt, 'ex': 1ex, 'vw': 1vw, 'vh': 1vh, 'vmin': 1vmin, 'vmax': 1vmax);
+  
+  @if not index(map-keys($units), $unit) {
+    $_: log('Invalid unit `#{$unit}`.');
+  }
+  
+  @return $value * map-get($units, $unit);
+}
+
+@mixin responsive-font($responsive, $min, $max: false, $fallback: false) {
+  $responsive-unitless: $responsive / ($responsive - $responsive + 1);
+  $dimension: if(unit($responsive) == 'vh', 'height', 'width');
+  $min-breakpoint: $min / $responsive-unitless * 100;
+  
+  @media (max-#{$dimension}: #{$min-breakpoint}) {
+    font-size: $min;
+  }
+  
+  @if $max {
+    $max-breakpoint: $max / $responsive-unitless * 100;
+    
+    @media (min-#{$dimension}: #{$max-breakpoint}) {
+      font-size: $max;
+    }
+  }
+  
+  @if $fallback {
+    font-size: $fallback;
+  }
+  
+  font-size: $responsive;
+}
+
+@mixin type-fontSmoothing($value: antialiased) {
+    @if $value == antialiased {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    @else {
+        -webkit-font-smoothing: subpixel-antialiased;
+        -moz-osx-font-smoothing: auto;
+    }
+}
+
+$base-unit: 0.8 !default;
+
+@function unitSize($multiplier, $offset: 0) {
+    @return to-number(($base-unit * $multiplier + $offset) + rem);
+}
+
+$grid-breakpoints: (
+    xxs: 0, // Extra small screen / phone
+    xs: 320px, // Extra small screen / phone
+    sm: 544px, // Small screen / phone
+    md: 768px, // Medium screen / tablet
+    lg: 992px, // Large screen / desktop
+    xl: 1200px  // Extra large screen / wide desktop
+) !default;
+
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+  $n: index($breakpoint-names, $name);
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - 1px, null);
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+  @include media-breakpoint-up($name, $breakpoints) {
+    @include media-breakpoint-down($name, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+@function long-shadow($direction, $length, $color, $fade: false, $shadow-count: 100) {
+  $shadows: ();
+  $conversion-map: ( 
+    to top: 180deg, 
+    to top right: 135deg, 
+    to right top: 135deg,
+    to right: 90deg,
+    to bottom right: 45deg,
+    to right bottom: 45deg,
+    to bottom: 0deg,
+    to bottom left: 315deg,
+    to left bottom: 315deg,
+    to left: 270deg,
+    to left top: 225deg,
+    to top left: 225deg
+  );
+  
+  @if map-has-key($conversion-map, $direction) {
+    $direction: map-get($conversion-map, $direction);
+  }
+  
+  @for $i from 1 through $shadow-count {
+    $current-step: ($i * $length / $shadow-count);
+    $current-color: if(not $fade, $color, if(type-of($fade) == 'color',  mix($fade, $color, ($i / $shadow-count * 100)), rgba($color, 1 - $i / $shadow-count)));
+    
+    $shadows: append($shadows, (sin(0deg + $direction) * $current-step) (cos(0deg + $direction) * $current-step) 0 $current-color, 'comma');
+  }
+  
+  @return $shadows;
+}
+
+
+
+
+
+// ====================================================================================
+// Basic
+//
+
+@at-root {
+  
+  html {
+    box-sizing: border-box;
+  }
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  html {
+    font-size: 62.5%;  
+  }
+
+  body {
+    font-size: 1.4rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+}
+
+
+// ==================================================
+// Global utilities
+//
+
+@at-root {
+  
+  .u-pullRight {
+    float: right;
+  }
+  
+}
+
+
+// ==================================================
+// Toggle
+//
+
+@at-root {
+
+  .Toggle {
+    position: relative;
+    display:  inline-block;
+    width: $l-Toggle-size;
+    height: $l-Toggle-size;
+    padding-top: $l-Toggle-size / 2;
+    border-radius: $l-Toggle-radius;
+    background-color: $c-Toggle-bg;
+    @at-root button#{&} {
+      border: 0;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    //   
+    // Bars
+    // 
+
+    span {
+      margin: -$l-Toggle-barHeight/2 auto 0;
+      vertical-align: top;
+      transition-duration: 0s;
+      transition-delay: 0.2s;
+
+      // Hide text
+      text-indent: 100%;
+      line-height: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      &,
+      &:before,
+      &:after {
+        display: block;
+        width: $l-Toggle-barWidth;
+        height: $l-Toggle-barHeight;
+        background-color: $c-Toggle-bar;
+      }
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        transition-property: margin, transform;
+        transition-duration: 0.2s;
+        transition-delay: 0.2s, 0s;
+      }
+      &:before {
+        margin-top: -$l-Toggle-barSpacing;
+      }
+      &:after {
+        margin-top: $l-Toggle-barSpacing;
+      }
+    }
+
+    //   
+    // s t a t e :  hover
+    //
+
+    &:hover {
+      span {
+        &:before {
+          transform: translateY(-1px);
+        }
+        &:after {
+          transform: translateY(1px);
+        }
+      }
+    }
+
+    //   
+    // s t a t e :  active
+    //   
+
+    &.is-active {
+      span {
+        background-color: rgba($c-Toggle-bar,0);
+        transition-delay: 0.2s;
+        &:before,
+        &:after {
+          margin-top: 0;
+          transition-delay: 0s, 0.2s;
+        }
+        &:before {
+          transform: rotate(45deg);
+        }
+        &:after {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+
+}
+
+
+// ==================================================
+// Social icon links
+//
+
+@at-root {
+
+  .SocialLink {
+    color: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.28rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    margin-left: -1px;
+    padding: unitSize(1.5) !important;
+    border: 1px solid rgba(255,255,255,0.06);
+    background-color: $c-Navbar-bg;
+  }
+
+  .SocialLink-icon {
+    display: block;
+    width: $l-socialLink-iconSize;
+    height: $l-socialLink-iconSize;
+    fill: currentColor;
+  }
+  
+.SocialLink-text {
+  @include visuallyhidden();
+}
+
+}
+
+
+// ==================================================
+// Navbar
+//
+
+@at-root {
+  
+  .home-container {
+    min-height: 100vh;
+    background-color: #17171E;
+  }
+
+  body {
+    min-height: 100vh;
+    padding-top: $l-Navbar-size;
+  }
+
+  .Navbar {
+    border-right: 1px solid #000000;
+    z-index: 1000000;
+    color: $c-Navbar;
+    font-size: 1.1rem;
+    font-weight: bold;
+    line-height: $l-Navbar-itemLineHeight;
+    letter-spacing: 0.28rem;
+    text-transform: uppercase;
+    position: fixed;
+    backface-visibility: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: $white;
+    a:not(.Navbar-toggle) {
+      color: inherit;
+      text-decoration: none;
+    }
+    ul {
+     @extend %resetList;
+    }
+  }
+  
+  .Navbar-brand,
+  .Navbar-menu a,
+  .Navbar-quickLinks a {
+    display: block;
+  }
+  
+  .Navbar-brand,
+  .Navbar-quickLinks a {
+    padding: $l-Navbar-itemPaddingY $l-Navbar-itemPaddingX;
+  }
+
+  .Navbar-quickLinks {
+    display: none;
+  }
+  
+  .Navbar-menu {
+    line-height: 1.6rem;
+    position: fixed;
+    top: $l-Navbar-size;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    width: 0%;
+    overflow-y: auto;
+    visibility: hidden;
+    padding: unitSize(3) 0;
+    background-color: rgba($c-Navbar-bg, 0.92);
+    opacity: 0;
+    transition-property: opacity, visibility, width;
+    transition-duration: 0.35s, 0.25s, 0.25s;
+    transition-delay: 0.1s;
+    .Navbar-menu-major {
+      flex-grow: 1;
+    }
+    &.is-active {
+      opacity: 1;
+      visibility: visible;
+      width: 100%;
+      transition-duration: 0.15s, 0.25s, 0.25s;
+    }
+  }
+  
+  .Navbar-menu-major a,
+  .Navbar-menu-minor a,
+  .Navbar-menu-minor .Navbar-menu-social {
+    padding: $l-Navbar-itemPaddingY $l-Navbar-menuOffset-sm;
+  }
+  
+  .Navbar-menu-major {
+    font-size: 1.4rem;
+    a {
+      &:hover {
+        background-color: rgba(white, 0.06);
+      }
+    }
+  }
+  
+  .Navbar-menu-minor {
+    color: darken($c-Navbar, 60%);
+    margin-top: $l-Navbar-itemPaddingX;
+    a {
+      padding-top: $l-Navbar-itemPaddingX / 2;
+      padding-bottom: $l-Navbar-itemPaddingX / 2;
+      &:hover {
+        color: $c-Navbar;
+      }
+    }
+  }
+  
+  .Navbar-menu-social {
+    overflow: hidden;
+    li {
+      float: left;
+    }
+  }
+}
+
+// ==================================================
+// Breakpoints
+// ==================================================
+
+@include media-breakpoint-up(sm) {
+  
+  .u-Navbar-hidden\@sm-up {
+    display: none;
+  }
+  
+  body {
+    padding-top: 0;
+    padding-left: $l-Navbar-size;
+  }
+  
+  .Navbar {
+    bottom: 0;
+    width: $l-Navbar-size;
+  }
+  
+  .Navbar-toggle {
+    position: absolute;
+    top: 0;
+  }
+  
+  .Navbar-menu {
+    top: 0;
+    left: $l-Navbar-size;
+    padding-top: $l-Navbar-size - ($l-Navbar-itemPaddingX - $l-Navbar-brandOffset-sm);
+    &.is-active {
+      width: 26rem;
+    }
+  }
+  
+  .Navbar-brand {
+    position: absolute;
+    top: $l-Navbar-size;
+    right: 0;
+    padding-left: $l-Navbar-brandOffset-sm !important;
+    padding-right: $l-Navbar-brandOffset-sm !important;
+    transform: rotate(-90deg) translateY(-$l-Navbar-size);
+    transform-origin: right top;
+  }
+  
+  .Navbar-quickLinks {
+    white-space: nowrap;
+    position: absolute;
+    bottom: 0;
+    display: block;
+    padding-left: $l-Navbar-itemPaddingY !important;
+    transform: rotate(-90deg) translateX(-$l-Navbar-size);
+    transform-origin: 0 0;
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+.site-name {
+  color: $c-red;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-weight: 700;
+  padding-top: 20px;
+  text-align: center;
+  font-family: Source Sans Pro, sans-serif;
+}
+
+@media all and (max-width: 543px) {
+  .site-name {
+    visibility: hidden;
+      font-size:10px;
+  }
+}
+
+.site-name-link {
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  transform: translateZ(0);
+  position: relative;
+}
+
+.site-name a {
+  color: $c-red;
+}
+
+.site-name a:hover {
+  color: #b84336;
+}
+
+
+
+/* home=============================*/
+$main: #222328;
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.animation {
+  margin: 80px;
+  background-color: #171820;
+
+}
+
+// body {
+//   background: white;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+//   height: 100vh;
+//   font-family: 'Roboto', sans-serif;
+// }
+
+.container {
+  display: flex;
+}
+
+.box {
+  background-color: white; //#202333;
+  position: relative;
+  width: 175px;
+  height: 50px;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+  color: $main;
+}
+
+.item {
+  padding: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  z-index: 99;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  transition: 0.4s all ease;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.or {
+  font-size: 14px;
+}
+
+.one {
+  &:before,
+  &:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #F13A3D;
+    transition: 0.4s all ease;
+  }
+
+  &:before {
+    top: 0;
+  }
+
+  &:after {
+    bottom: 0;
+  }
+
+  .item {
+    &:before,
+    &:after {
+      position: absolute;
+      top: 0;
+      content: '';
+      height: 100%;
+      width: 2px;
+      background: #F13A3D;
+      transition: 0.4s all ease;
+      z-index: -1;
+    }
+
+    &:before {
+      left: 0;
+    }
+
+    &:after {
+      right: 0;
+    }
+  }
+
+  &:hover {
+    &:before,
+    &:after {
+      transition: 0.4s all ease;
+    }
+
+    &:before {
+      transform: translateY(-10px);
+    }
+
+    &:after {
+      transform: translateY(10px);
+    }
+
+    .item {
+      color: white;
+      &:before,
+      &:after {
+        width: 100%;
+        transition: 0.4s all ease;
+      }
+    }
+  }
+}

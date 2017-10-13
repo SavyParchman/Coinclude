@@ -1,0 +1,80 @@
+/* <!---------------- COINS CSS ----------------> */
+
+.coin-view {
+  margin-top: 50px;
+  font-family: "Raleway", sans-serif;
+}
+
+.coin-table {
+	max-width: 1000px;
+	margin: 30px auto;
+	padding: 10px 40px 50px;
+  background: #FFF;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+
+.coin-title {
+  text-align: center;
+  font-size: 3em;
+  font-weight: 700;
+}
+
+#filter {
+	margin-bottom: 1em;
+}
+.pagination {
+	margin: 0 0 1em;
+}
+
+.coin-pagination > li > a:focus,
+.coin-pagination > li > a:hover,
+.coin-pagination > li > span:focus,
+.coin-pagination > li > span:hover {
+    z-index: 3;
+    background-color: mintcream;
+    border-color: black;
+		color: black;
+}
+
+.coin-pagination>li.active>a,
+.coin-pagination>li.active>a:focus,
+.coin-pagination>li.active>a:hover {
+	border-color: black;
+	background-color: mintcream;
+  color: black;
+}
+
+.table {
+	font-size: 0.9em;
+	table-layout: fixed;
+}
+th.sortable {
+	cursor: pointer;
+}
+th.sortable:hover,
+th.sortable:focus,
+th.sortable:active {
+	background: mintcream;
+}
+
+.caret-blank {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+}
+.caret-up {
+	border-bottom: 8px solid #333;
+}
+.caret-down {
+	border-top: 8px solid #333;
+}
+
+.coin-name {
+	font-family: "Source Sans Pro", sans-serif;
+	font-weight: 500;
+	font-size: 1.3em;
+	/* font-variant: small-caps; */
+}
+

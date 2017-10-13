@@ -1,0 +1,130 @@
+<!---------------- WALLETS VIEW ---------------->
+
+<section class="wallet-view">
+    <main class="wallet-table">
+      <h1 class="wallet-title">Wallets</h1><br>
+      
+      <input id="filter" type="text" placeholder="Search" class="form-control" ng-model="filterTable">
+  
+      <uib-pagination class="wallet-pagination" total-items="(wallets | filter:filterTable).length" ng-model="currentPage" ng-change="updatePageIndexes()" 
+        max-size="maxPaginationSize" items-per-page="itemsPerPage" boundary-links="true" 
+          previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+      </uib-pagination> 
+
+      <p> The table has two data fields in certain columns. You can sort by either of those fields. </p> 
+  
+<table class="table table-condensed table-hover">
+  <thead>
+    <tr>
+      <th style="width: 25px"> &#35; </th>
+  
+      <th class="sortable" style="width: 15%" ng-click="singleSort('walletname')">
+        Name <span class="caret-blank" ng-class="{'caret-down':sortDescend('walletname'), 'caret-up':sortAscend('walletname')}"></span>
+      </th>
+  
+      <th class="sortable" style="width: 25%" ng-click="doubleSort('walletreviews','walletrating')" data-uib-tooltip="{{ sortTooltip('walletrating','walletreviews') }}" data-tooltip-append-to-body="true">
+        Reviews - Rating <span class="caret-blank" ng-class="{'caret-down':sortDescend('walletreviews','walletrating'), 'caret-up':sortAscend('walletreviews','walletrating')}"></span>
+      </th>
+  
+      <th class="sortable" style="width: 25%" ng-click="singleSort('walletsecrating')">
+        ... <span class="caret-blank" ng-class="{'caret-down':sortDescend('walletsecrating'), 'caret-up':sortAscend('walletsecrating')}"></span>
+      </th>
+  
+      <!-- <th class="sortable" style="width: 10%" ng-click="singleSort('walletanonrating')">
+        Anonymity <span class="caret-blank" ng-class="{'caret-down':sortDescend('walletanonrating'), 'caret-up':sortAscend('walletanonrating')}"></span>
+      </th> -->
+  
+      <th class="sortable" style="width: 25%" ng-click="singleSort('walleteaserating')">
+        --- <span class="caret-blank" ng-class="{'caret-down':sortDescend('walleteaserating'), 'caret-up':sortAscend('walleteaserating')}"></span>
+      </th> 
+  
+      <!-- <th class="sortable" style="width: 10%" ng-click="singleSort('walletesrating')">
+        Extra Services <span class="caret-blank" ng-class="{'caret-down':sortDescend('walletesrating'), 'caret-up':sortAscend('walletesrating')}"></span>
+      </th> -->
+    <tr>
+  </thead>
+    <tbody>
+      <tr class="wallet-row" ng-repeat="wallet in wallets | orderBy:[filterSort, sortType, secondSortType, thirdSortType]"
+         ng-show="(filterSort(wallet) == 1) && ($index >= firstIndex) && ($index < lastIndex)">
+        <td class="table-row-index">
+          {{ $index + 1 }}
+        </td>
+  
+        <td class="wallet-name">
+          {{ wallet.walletname }}
+        </td>
+  
+        <td class="wallet-reviewsRating">
+
+           <!-- <div class="wallet-collapse">
+            <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>
+              <div uib-collapse="isCollapsed">
+                <div class="well well-lg">Some content -->
+<!-- 
+                    {{ wallet.walletreviews }} <br> 
+                    {{ wallet.walletrating }} -->
+
+                <!-- </div>
+              </div>
+          </div>  -->
+
+        <p class="wallet-rating">
+         Rating: {{ wallet.walletrating }} / 5  <br>
+         (out of {{ wallet.walletreviews }} reviews)
+        </p>
+        </td>
+  
+        <td class="walletsecrating">
+<BR>
+            <div class="wallet-collapse">
+                <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Rate this Wallet</button>
+                  <div uib-collapse="isCollapsed">
+                    <div class="well well-lg">
+                      
+                        <p class="wallet-details">
+                    
+                          
+                          
+                        </p>
+
+                    </div>
+                  </div>
+              </div>
+<BR>
+          <!-- {{ wallet.walletsecrating }} -->
+        </td>
+  
+        <!-- <td class="walletanonrating">
+          {{ wallet.walletanonrating }}
+        </td> -->
+  
+        <td class="walleteaserating">
+
+<BR>
+            <!-- <div class="review-collapse">
+                <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Rate this Wallet</button>
+                  <div uib-collapse="isCollapsed">
+                    <div class="well well-lg">
+                      
+                        <p class="review-details">
+                     SOME CONTENT
+                        </p>
+
+                    </div>
+                  </div>
+              </div> -->
+
+<BR>
+          <!-- {{ wallet.walleteaserating }} -->
+        </td> 
+  
+        <!-- <td class="walletesrating">
+          {{ wallet.walletesrating }}
+        </td> -->
+  
+      </tr>
+    </tbody>
+</table> 
+      
+</main>
+</section>

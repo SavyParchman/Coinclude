@@ -1,0 +1,1 @@
+SELECT * FROM wallets WHERE walletname = $1; 

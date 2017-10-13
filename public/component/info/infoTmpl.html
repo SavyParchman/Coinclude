@@ -1,0 +1,29 @@
+<!---------------- INFO VIEW ---------------->
+
+<BR>
+<BR>
+<div class="rating-container">
+  <div class="ratingStars">
+
+    <form class="Scroller-Container" ng-submit="submit()">
+
+      <uib-rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating">
+      </uib-rating>
+
+      <span class="label" ng-class="{'label-danger': percent<=1, 'label-warning': percent<=2, 'label-info': percent<=3, 'label-success': percent>=4}"
+        ng-show="overStar && !isReadonly">{{percent}}</span>
+      <BR>
+
+      <pre class="rating">Rate: <b>{{overStar}}</b>? - You rated: <b>{{rate}}</b> </pre>
+
+      <pre>Rate: <b>{{rate}}</b> - Readonly is: <i>{{isReadonly}}</i> - Hovering over: <b>{{overStar || "none"}}</b></pre>
+
+      <button type="button" class="btn btn-sm btn-danger" ng-click="rate = 0" ng-disabled="isReadonly">Clear</button>
+      <button type="submit" id="submit" class="btn btn-sm btn-primary" ng-click="postNewWalletRating(rating_val)" ng-disabled="isReadonly">Submit</button>
+
+    </form>
+    <hr />
+  </div>
+</div>
+<BR>
+<BR>

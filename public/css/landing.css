@@ -1,0 +1,834 @@
+
+
+.landing-title {
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  z-index: 10;
+  font-weight: 900;
+  color: black;
+  text-align: center;
+  font-size: 128px;
+  line-height: 96px;
+}
+
+#case-item-h3 {
+  color: black;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 0.3em;
+  letter-spacing: 1px;
+  /* position: relative; */
+  z-index: 10;
+  padding-right: 210px;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+}
+
+#case-item-h1 {
+  font-weight: 900;
+  color: black;
+  text-align: center;
+  font-size: 128px;
+  line-height: 96px;
+  padding-bottom: 12px;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  z-index: 10;
+  flex: 1 100%;
+}
+
+@media all and (max-width: 600px) {
+  #case-item-h1  {
+    font-size: 108px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  #case-item-h1  {
+    font-size: 78px;
+  }
+}
+
+#case-item-sm {
+  padding-top: 10px;
+  color: black;
+  text-align: center;
+  font-size: 18px;
+  line-height: 2em;
+  letter-spacing: 1px;
+
+  z-index: 10;
+
+  /* text-transform: uppercase; */
+  font-family: "Quicksand", sans-serif;
+}
+
+
+
+
+
+
+
+h1 {
+  font-style: normal;
+  font-size: 45px;
+  font-weight: normal;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+
+.site-name-blog {
+  padding-top: 30px;
+}
+
+.site-name a {
+  color: #1B49ED;
+}
+
+.site-name-link {
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  transform: translateZ(0);
+  position: relative;
+}
+
+.site-name-link::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: limegreen;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+  transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+}
+
+.button-image-overlay {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  padding: 17px 20px;
+  background-color: #000;
+  color: #fff;
+  font-size: 13px;
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+  transform: scaleY(0) translateZ(0);
+  transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  font-family: Raleway, sans-serif;
+}
+
+.text-highlighted {
+  color: #354EC5;
+}
+
+@-webkit-keyframes rotateplane {
+  0% {
+    -webkit-transform: perspective(120px);
+  }
+
+  50% {
+    -webkit-transform: perspective(120px) rotateY(180deg);
+  }
+
+  100% {
+    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+  }
+}
+
+@keyframes rotateplane {
+  0% {
+    -webkit-transform: perspective(120px) rotateX(0) rotateY(0);
+    transform: perspective(120px) rotateX(0) rotateY(0);
+  }
+
+  50% {
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0);
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0);
+  }
+
+  100% {
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+.button-image-overlay {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  padding: 17px 20px;
+  background-color: #000;
+  color: #fff;
+  font-size: 13px;
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+  transform: scaleY(0) translateZ(0);
+  transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  font-family: "Raleway", sans-serif;
+}
+
+.centered-items {
+  text-align: center;
+  margin-top: 4em;
+  margin-bottom: 4em;
+  font-family: "Raleway", sans-serif;
+}
+
+.centered-item {
+  display: inline-block;
+  list-style: none;
+  text-align: center;
+  padding: 20px 10px;
+}
+
+@media all and (max-width: 600px) {
+  .centered-item {
+    display: block;
+  }
+}
+
+@media all and (max-width: 410px) {
+  .centered-item {
+    display: block;
+  }
+}
+
+.centered-item-title {
+  font-size: 0.8em;
+}
+
+.centered-item-description {
+  font-size: 0.7em;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.2em;
+}
+
+.section-header {
+  margin: 0;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  z-index: 10;
+  font-weight: 900;
+  color: black;
+  text-align: left;
+  font-size: 128px;
+  position: relative;
+  line-height: 0.6em;
+  pointer-events: none;
+  flex: 1 100%;
+}
+
+@media all and (max-width: 600px) {
+  .section-header {
+    font-size: 136px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .section-header {
+    font-size: 106px;
+  }
+}
+
+.case-items {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+@media all and (max-width: 900px) {
+  .case-items {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .case-items {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.case-item {
+  flex: 1 50%;
+  text-align: left;
+  padding-top: 50px;
+  padding-right: 50px;
+  padding-left: 50px;
+  box-sizing: border-box;
+  min-height: 445px;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-item:hover .button-image-overlay {
+  transform: scaleY(1) translateZ(0);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.case-item:hover .case-item-header {
+  transform: translate3D(0, -6px, 0);
+}
+
+.case-item:hover .case-item-text {
+  transform: translate3D(0, 8px, 0);
+}
+
+@media all and (max-width: 900px) {
+  .case-item {
+    padding-top: 40px;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+}
+
+@media all and (max-width: 800px) {
+  .case-item {
+    flex: 1 100%;
+    min-height: initial;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .case-item {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .case-item {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.case-item-bg {
+  animation: fade-In 0.6s ease-out;
+  transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.case-item:hover .case-item-bg {
+  transform: scale3D(1.04, 1.04, 1);
+}
+
+@keyframes fade-In {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.case-item-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.case-item-wide {
+  text-align: center;
+  min-height: 440px;
+  flex: 1 100%;
+}
+
+@media all and (max-width: 800px) {
+  .case-item-wide,
+  .case-item-wide.case-item-blog {
+    min-height: initial;
+  }
+}
+
+.case-item-header {
+  min-height: 2em;
+  margin-bottom: 1em;
+  font: normal 62px/1.1 "Raleway", sans-serif;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateZ(0);
+  position: relative;
+  z-index: 10;
+}
+
+.case-item-wide .case-item-header {
+  margin-top: 0.9em;
+  margin-bottom: 0.7em;
+  min-height: initial;
+}
+
+@media all and (max-width: 1000px) {
+  .case-item-header {
+    font-size: 56px;
+  }
+}
+
+@media all and (max-width: 900px) {
+  .case-item-header {
+    font-size: 50px;
+    max-width: 400px;
+  }
+
+  .case-item-wide .case-item-header {
+    max-width: initial;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .case-item-header {
+    font-size: 42px;
+  }
+}
+
+.case-item-wide .case-item-header-gh-windows {
+  margin-top: 0.6em;
+  margin-bottom: 1.35em;
+}
+
+@media all and (max-width: 800px) {
+  .case-item-wide .case-item-header {
+    margin-top: 0;
+  }
+}
+
+.case-item-text {
+  max-width: 50%;
+  font-size: 14px;
+  line-height: 1.9em;
+  position: relative;
+  z-index: 10;
+  padding-top: 1em;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateZ(0);
+  font-family: "Raleway", sans-serif;
+}
+
+.case-item-text::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -10px;
+  left: 0;
+  height: 3px;
+  background-color: currentColor;
+  width: 60px;
+}
+
+.case-item-wide .case-item-text {
+  margin: auto;
+  max-width: 45%;
+}
+
+.case-item-wide .case-item-text::before {
+  right: 0;
+  margin: auto;
+}
+
+@media all and (max-width: 900px) {
+  .case-item-text,
+  .case-item-wide .case-item-text {
+    max-width: 70%;
+  }
+}
+
+@media all and (max-width: 800px) {
+  .case-item-text,
+  .case-item-wide .case-item-text {
+    max-width: 60%;
+    padding-bottom: 40px;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .case-item-text,
+  .case-item-wide .case-item-text {
+    max-width: 50%;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .case-item-text,
+  .case-item-wide .case-item-text {
+    max-width: 75%;
+  }
+}
+
+.case-item-content {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.case-item:hover .case-item-content {
+  transform: scale(1.025);
+}
+
+
+
+.case-item-spotify1 .case-item-bg {
+  background-position: right bottom;
+}
+.case-item-spotify {
+  background-color: #93B1C4;
+  color: white;
+}
+
+.case-item-spotify .case-item-bg {
+  background-position: right bottom;
+}
+
+
+
+.case-item-minecraft {
+  color: #FFEB55;
+  background-color: #A7A7A7;
+}
+
+
+
+.case-item-gh-css {
+  background-color: #92D9C7;
+  color: #fff;
+}
+
+.content-gh-css {
+  width: 490px;
+  height: 320px;
+  position: absolute;
+  right: -70px;
+  bottom: 0;
+  opacity: 0.4;
+}
+
+
+
+.case-item-lookback {
+  background-color: #B5BF57;
+  color: white;
+}
+
+.content-lookback {
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+
+
+.case-item-gh-windows {
+  background-color: #F4463C;
+  color: white;
+}
+
+.case-item-gh-windows .case-item-text::before {
+  display: none;
+}
+
+.content-gh-windows {
+  width: 1050px;
+  height: 115px;
+  position: absolute;
+  right: 110px;
+  top: 55px;
+  bottom: 0;
+  margin: auto;
+}
+
+
+
+.case-item-blog {
+  background-color: #3F52B1;
+  color: white;
+  min-height: 460px;
+  padding-top: 145px;
+}
+
+.case-item-blog .case-item-bg {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center -10px;
+}
+
+@media all and (max-width: 900px) {
+  .case-item-blog .case-item-bg {
+    background-size: cover;
+  }
+}
+
+
+
+.full-height {
+  height: 100%;
+}
+
+.centered-parent {
+  position: relative;
+}
+
+.centered {
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.centered,
+.centered-x {
+  position: absolute;
+  left: 50%;
+}
+
+.centered-x {
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.centered-y {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+
+
+
+
+
+.section.section-hero {
+  background: #ECF1F7;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 180px;
+  padding-top: 40px;
+  position: relative;
+}
+
+.section.section-hero {
+  background: #F4F9FF;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 180px;
+  padding-top: 40px;
+  position: relative;
+}
+
+.featured-coins {
+  padding-left: 0;
+  margin-bottom: 40px;
+}
+
+.featured-coins li.coin-down .label-percent {
+  color: #A11B0A;
+  font-weight: normal;
+}
+
+.featured-coins li.coin-up .label-percent {
+  color: #60C27B;
+  font-weight: normal;
+}
+
+.featured-coins li.coin-up .label-percent.unchanged-text {
+  color: #2D4F79;
+  font-weight: normal;
+}
+
+.featured-coins .swiper-slide .price-current.highlight-up {
+  color: #60C27B;
+}
+
+.featured-coins .swiper-slide .price-current.highlight-down {
+  color: #A11B0A;
+}
+
+.featured-coins .swiper-slide .price-current.highlight-unchanged {
+  color: #2D4F79;
+}
+
+.featured-coins .swiper-slide .label-percent.up-text {
+  color: #60C27B;
+}
+
+.featured-coins .swiper-slide .label-percent.down-text {
+  color: #A11B0A;
+}
+
+.featured-coins .swiper-slide .label-percent.unchanged-text {
+  color: #2D4F79;
+}
+
+.featured-coins-header {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -60px;
+  height: 25px;
+  width: 120px;
+  line-height: 25px;
+  border-radius: 0 0 4px 4px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  background: #FFF;
+  color: #696A6E;
+  z-index: 77;
+}
+
+.featured-coins li {
+  position: relative;
+  display: block;
+  float: left;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 12px;
+  background: #FFF;
+  width: 150px;
+  height: 100px;
+}
+
+.swiper-slide {
+  width: 150px;
+  height: 100px;
+}
+
+.featured-coins li .thumb-coin {
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  overflow: hidden;
+  line-height: 30px;
+  position: absolute;
+  left: -15px;
+  top: -15px;
+  display: none;
+}
+
+.featured-coins li .coins-name {
+  text-align: left;
+  padding-left: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 30px;
+  color: #121212;
+  padding-right: 10px;
+}
+
+.featured-coins li img {
+  width: 20px;
+}
+
+.featured-coins li .coin-info {
+  overflow: hidden;
+}
+
+.featured-coins li .price-current {
+  display: inline-block;
+  float: left;
+  padding-left: 10px;
+  height: 30px;
+  line-height: 30px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #096B23;
+}
+
+.featured-coins li .coin-other {
+  line-height: 30px;
+  padding-left: 10px;
+  text-align: left;
+  color: #555;
+}
+
+.featured-coins li .price-trend {
+  display: inline-block;
+  float: left;
+  margin-left: 5px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.featured-coins li.coin-up {
+  background: #FFF;
+}
+
+.featured-coins li.coin-up .coins-name {
+  color: #121212;
+}
+
+.featured-coins li.coin-up .price-current {
+  color: #60C27B;
+}
+
+.featured-coins li.coin-up .price-trend .fa {
+  color: #60C27B;
+}
+
+.featured-coins li.coin-down {
+  background: #FFF;
+}
+
+.featured-coins li.coin-down .coins-name {
+  color: #121212;
+}
+
+.featured-coins li.coin-down .price-current {
+  color: #A11B0A;
+}
+
+.featured-coins li.coin-down .price-trend .fa {
+  color: #A11B0A;
+}
+
+.featured-coins li.coin-unchanged {
+  background: #FFF;
+}
+
+.featured-coins li.coin-unchanged .coins-name {
+  color: #121212;
+}
+
+.featured-coins li.coin-unchanged .price-current {
+  color: #2D4F79;
+}
+
+.featured-coins li.coin-unchanged .price-trend .fa {
+  color: #2D4F79;
+}

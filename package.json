@@ -1,0 +1,25 @@
+{
+  "name": "serverCC",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "massive": "^4.4.0",
+    "passport": "^0.4.0",
+    "passport-auth0": "^0.6.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  }
+}

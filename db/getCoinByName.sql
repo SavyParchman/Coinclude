@@ -1,0 +1,1 @@
+SELECT * FROM coins WHERE coinname = $1; 

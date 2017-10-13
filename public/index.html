@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="fullstack">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Coinclude</title>
+
+<!--===== FONTS / ICONS =====-->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Reklino/munkey-icons/master/munkey.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+
+<!--====== BOOTSTRAP CSS ======-->
+ <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> -->
+ <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+ <!--====== CUSTOM STYLESHEETS ======-->   
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/login.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/landing.css">
+<link rel="stylesheet" href="/css/wallets.css">
+<link rel="stylesheet" href="/css/coins.css">
+<link rel="stylesheet" href="/css/info.css">
+<link rel="stylesheet" href="/css/stars.css">
+</head>
+<body>
+
+<!--======= NAV =======-->
+<nav class="Navbar">
+    <a href="#" id="toggle" class="Toggle Navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse"><span></span></a>
+    
+    <a class="Navbar-brand u-pullRight" ui-sref="home">Project&nbsp;&nbsp;Coinclude</a>
+    
+        <div id="navbarCollapse" class="Navbar-menu">
+          <ul class="Navbar-menu-major">
+            <li><a ui-sref="info">About</a></li>
+            <li><a ui-sref="wallets">Wallets</a></li>
+            <li><a ui-sref="coins">Coins</a></li>
+            <li><a ui-sref="">Exchanges</a></li>
+            
+          </ul>
+          <div class="Navbar-menu-minor">
+            <ul>
+              <li><a href="#link">Guide</a></li>
+              <li><a href="#link">Forum</a></li>
+              <li><a href="#link">Contact</a></li>
+            </ul>
+            <ul class="Navbar-menu-social u-Navbar-hidden@sm-up">
+              <li>
+                <a class="SocialLink" href="#link">
+                  <svg class="SocialLink-icon">
+                    <use xlink:href="#facebook" />
+                  </svg>
+                  <span class="SocialLink-text">Wallets</span>
+                </a>
+              </li>
+              <li>
+                <a class="SocialLink" href="#link">
+                  <svg class="SocialLink-icon">
+                    <use xlink:href="#twitter" />
+                  </svg>
+                  <span class="SocialLink-text">Exchanges</span>
+                </a>
+              </li>
+              <li>
+                <a class="SocialLink" href="#link">
+                  <svg class="SocialLink-icon">
+                    <use xlink:href="#instagram" />
+                  </svg>
+                  <span class="SocialLink-text">Coins</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        <ul class="Navbar-quickLinks">
+          <li><a ui-sref="wallets">Wallets</a></li>
+          <li><a ui-sref="rating">Exchanges</a></li>
+          <li><a ui-sref="coins">Coins</a></li>
+        </ul>
+      </nav>
+
+
+<!--===== Site name =====-->
+<h1 class="site-name">
+    <a class="site-name-link" ui-sref="home"> Project Coinclude </a>
+</h1>
+      
+<!---~~~~~~~~ Injected Views ~~~~~~~~~-->
+    <ui-view></ui-view>
+
+</body>
+
+<!---======= Greensock scripts =======-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+
+<!---======= JQuery scripts =======-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<!---======= Angular scripts =======-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.0.0/ui-bootstrap-tpls.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular-animate.js"></script>
+
+<!---======= Custom scripts =======-->
+<script type="text/javascript" src="app.module.js"></script>
+<script type="text/javascript" src="app.routes.js"></script>
+<script type="text/javascript" src="component/login/mainCtrl.js"></script>
+<script type="text/javascript" src="component/login/mainSrvc.js"></script>
+<script type="text/javascript" src="component/home/homeCtrl.js"></script>
+<script type="text/javascript" src="component/wallets/walletCtrl.js"></script>
+<script type="text/javascript" src="component/wallets/walletSrvc.js"></script>
+<script type="text/javascript" src="component/coins/coinCtrl.js"></script>
+<script type="text/javascript" src="component/coins/coinSrvc.js"></script>
+<script type="text/javascript" src="component/shared/ratingCtrl.js"></script>
+<script type="text/javascript" src="component/shared/ratingSrvc.js"></script>
+<script type="text/javascript" src="component/navigation/navDr.js"></script>
+<script type="text/javascript" src="component/info/infoCtrl.js"></script>
+
+</html>
